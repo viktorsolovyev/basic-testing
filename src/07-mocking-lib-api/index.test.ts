@@ -16,6 +16,9 @@ describe('throttledGetDataFromApi', () => {
 
   test('should create instance with provided base url', async () => {
     const mockedCreate = jest.spyOn(axios, 'create');
+    jest
+      .spyOn(axios.Axios.prototype, 'get')
+      .mockImplementation(() => Promise.resolve(true));
     await throttledGetDataFromApi('/users');
     expect(mockedCreate).toHaveBeenLastCalledWith({
       baseURL: 'https://jsonplaceholder.typicode.com',
